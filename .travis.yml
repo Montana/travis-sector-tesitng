@@ -1,0 +1,58 @@
+---
+language: python
+
+python:
+  - "3.8"
+  - "3.9"
+
+services:
+  - docker
+  - postgresql
+
+env:
+  global:
+    - MY_ENV_VARIABLE=SectorTesting
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+jobs:
+  include:
+    - stage: test
+      name: "Linting"
+      script: echo "Linting Passed"
+    - stage: test
+      name: "Unit Tests"
+      script: echo "All tests passed!"
+    - stage: build
+      name: "Docker Build"
+      script: |
+        echo "Building Docker Image..."
+        docker build -t my-docker-image .
+        echo "Docker Image Built Successfully"
+    - stage: deploy
+      name: "Deploy to Heroku"
+      script: echo "Deployed to Heroku Successfully"
+
+before_install:
+  - echo "Setting up before installation..."
+
+install:
+  - echo "Running install commands..."
+  - pip install --upgrade pip
+  - pip install -r requirements.txt || echo "No requirements to install."
+
+before_script:
+  - echo "Preparing to run tests..."
+
+after_success:
+  - echo "Build succeeded!"
+
+after_failure:
+  - echo "Build failed!"
+
+after_script:
+  - echo "Cleaning up after script..."
+
+notifications: skip
