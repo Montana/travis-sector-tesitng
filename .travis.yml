@@ -1,7 +1,5 @@
 ---
-dist: jammy 
 language: python
-group: edge
 
 services:
   - docker
