@@ -30,6 +30,9 @@ jobs:
     - stage: deploy
       name: "Deploy to Heroku"
       script: echo "Deployed to Heroku Successfully"
+    - stage: environment check
+      name: "Checking environment..."
+      script: cat /etc/os-release
 
 before_install:
   - echo "Setting up before installation..."
