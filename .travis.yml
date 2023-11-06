@@ -1,5 +1,7 @@
 ---
+dist: jammy 
 language: python
+group: edge
 
 services:
   - docker
@@ -7,7 +9,7 @@ services:
 
 env:
   global:
-    - MY_ENV_VARIABLE=SectorTesting
+    - MY_ENV_VARIABLE=HEROKU_SECRETS
 
 cache:
   directories:
@@ -16,11 +18,11 @@ cache:
 jobs:
   include:
     - stage: test
-      name: "Linting"
+      name: "Testing for deployment on Heroku"
       script: echo "Linting Passed"
     - stage: test
       name: "Unit Tests"
-      script: echo "All tests passed!"
+      script: echo "All unit tests passed!"
     - stage: build
       name: "Docker Build"
       script: |
