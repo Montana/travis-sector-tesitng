@@ -11,40 +11,41 @@ env:
     - MY_ENV_VARIABLE=HEROKU_SECRETS
 
 cache:
-  directories:
-    - $HOME/.cache/pip
-
-jobs:
-  include:
-    - stage: test
-      name: "Testing for deployment on Heroku"
-      script: echo "Linting Passed"
-    - stage: test
-      name: "Unit Tests"
-      script: echo "All unit tests passed!"
-    - stage: build
-      name: "Docker Build"
-      script: |
-        echo "Building Docker Image..."
-        docker build -t tensorflow/build .
-        echo "Docker Image Built Successfully"
-    - stage: deploy
-      name: "Deploy to Heroku"
-      script: echo "Deployed to Heroku Successfully"
-    - stage: environment check
-      name: "Checking environment..."
-      script: cat /etc/os-release
+  pip: true
 
 before_install:
   - echo "Setting up before installation..."
 
 install:
-  - echo "Running install commands..."
   - pip install --upgrade pip
-  - pip install -r requirements.txt || echo "No requirements to install."
+  - pip install -r requirements.txt || echo "No requirements file found."
 
-before_script:
-  - echo "Preparing to run tests..."
+jobs:
+  include:
+    - stage: "Preparation"
+      name: "Setting up the environment"
+      script: 
+        - echo "Linting Passed"
+        - echo "Running install commands..."
+        - cat /etc/os-release
+
+    - stage: "Testing"
+      name: "Unit and Integration Tests"
+      script: 
+        - echo "Preparing to run tests..."
+        - echo "All unit tests passed!"
+
+    - stage: "Build"
+      name: "Building Docker Image"
+      script: 
+        - echo "Building Docker Image..."
+        - docker build -t tensorflow/build .
+        - echo "Docker Image Built Successfully"
+
+    - stage: "Deployment"
+      name: "Deploying to Heroku"
+      script: 
+        - echo "Deployed to Heroku Successfully"
 
 after_success:
   - echo "Build succeeded!"
@@ -55,4 +56,5 @@ after_failure:
 after_script:
   - echo "Cleaning up after script..."
 
-notifications: skip
+notifications:
+  email: false
