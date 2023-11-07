@@ -4,6 +4,7 @@ language: python
 services:
   - docker
   - postgresql
+  - redis
 
 env:
   global:
