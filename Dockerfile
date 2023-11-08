@@ -28,8 +28,9 @@ RUN apt-add-repository ppa:brightbox/ruby-ng && \
     gem install bundler --no-document
 
 # Install Python
-RUN apt-get update && apt-get install -y python python-dev python-pip && \
-    pip install --upgrade pip setuptools
+RUN apt-get update
+RUN apt-get install -y python3-pip
+RUN pip3 install --upgrade pip    
 
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
