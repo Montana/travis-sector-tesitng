@@ -56,5 +56,4 @@ after_failure:
 after_script:
   - echo "Cleaning up after script..."
 
-notifications:
-  email: false
+notifications: skip
