@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Ruby
 RUN apt-add-repository ppa:brightbox/ruby-ng && \
     apt-get update && \
-    apt-get install -y ruby2.6.0 ruby2.6-dev && \
+    apt-get install -y ruby2.6 ruby2.6-dev && \
     gem install bundler --no-document
 
 # Install Python
