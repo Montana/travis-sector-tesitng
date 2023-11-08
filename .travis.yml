@@ -39,7 +39,7 @@ jobs:
       name: "Building Docker Image"
       script: 
         - echo "Building Docker Image..."
-        - docker build -t tensorflow/build .
+        - docker build -t travisci/ci-garnet .
         - echo "Docker Image Built Successfully"
 
     - stage: "Deployment"
