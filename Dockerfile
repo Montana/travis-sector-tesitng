@@ -25,12 +25,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-add-repository ppa:brightbox/ruby-ng && \
     apt-get update && \
     apt-get install -y ruby2.6 ruby2.6-dev && \
-    pip install --upgrade pip
     gem install bundler --no-document
 
 # Install Python
 RUN apt-get update && apt-get install -y python python-dev python-pip && \
     pip install --upgrade pip setuptools
+    pip install --upgrade pip
 
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
