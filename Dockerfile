@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gnupg \
     jq \
     sudo && \
-    # Add Ruby from Brightbox's repo, and Node.js from Nodesource's repo
+    # Add Brightbox PPA for Ruby
     apt-add-repository ppa:brightbox/ruby-ng && \
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     # Install Ruby, Python, Node.js, Java
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     nodejs \
     python3-pip \
     openjdk-8-jdk && \
-    # Upgrade pip and install bundler for Ruby
+    # Upgrade pip for Python and install bundler for Ruby
     pip3 install --upgrade pip && \
     gem install bundler --no-document && \
     # Clean up to keep the image small
