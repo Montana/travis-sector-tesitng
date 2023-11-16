@@ -1,4 +1,8 @@
 ---
+dist: focal
+vm:
+ size: gpu-xlarge
+
 language: python
 
 services:
