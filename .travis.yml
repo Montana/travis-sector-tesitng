@@ -7,12 +7,10 @@ language: python
 
 services:
   - docker
-  - postgresql
-  - redis
 
 env:
   global:
-    - MY_ENV_VARIABLE=HEROKU_SECRETS
+    - MY_ENV_VARIABLE=$HEROKU_SECRETS
 
 cache:
   pip: true
@@ -32,6 +30,8 @@ jobs:
         - echo "Linting Passed"
         - echo "Running install commands..."
         - cat /etc/os-release
+        - free -hm 
+        - nproc 
 
     - stage: "Testing"
       name: "Unit and Integration Tests"
@@ -45,6 +45,8 @@ jobs:
         - echo "Building Docker Image..."
         - docker build -t travisci/ci-garnet .
         - echo "Docker Image Built Successfully"
+        - free -hm 
+        - nproc 
 
     - stage: "Deployment"
       name: "Deploying to Heroku"
